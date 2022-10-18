@@ -1,0 +1,21 @@
+version: "3.3"
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:stable
+    working_dir: ${WORKING_DIR}
+    ports:
+      - "80:80"
+  apache:
+    container_name: apache
+    image: tunanyugen/personal-project
+    working_dir: ${WORKING_DIR}
+    ports:
+      - "8080:8080"
+    volumes:
+      # main project source code
+      - ./src/personal-project:/var/www/html
+      # apache2 port configuration
+      - ./etc/apache2/ports.conf:/etc/apache2/ports.conf
+      # apache site config
+      - ./etc/apache2/sites-available/000-default.conf:/etc/apache2/sites-available/000-default.conf
